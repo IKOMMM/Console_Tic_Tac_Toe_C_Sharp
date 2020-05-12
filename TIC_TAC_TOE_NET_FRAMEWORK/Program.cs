@@ -9,10 +9,10 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
         {
             GraczLudzki gA = new GraczLudzki();
             GraczKomputerowy gB = new GraczKomputerowy();
-            gA.Imie = "Uzytkownik";
-            gB.Imie = "Komputer";
-            gA.Znak = 'x';
-            gB.Znak = 'o';
+            gA.Imie = "Player";
+            gB.Imie = "SI";
+            gA.Znak = 'X';
+            gB.Znak = '0';
 
             char[,] plansza = new char[3, 3] {
                 { '1', '2', '3' },
@@ -33,13 +33,13 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
 
                 if (ruchGraczaA)
                 {
-                    Console.WriteLine("Ruch wykonuje: " + gA.Imie);
+                    Console.WriteLine("Movement performs: " + gA.Imie + ".");
                     koniecGry = gA.WykonajRuch(plansza, planszaKopia);
                     ruchGraczaA = false;
                 }
                 else
                 {
-                    Console.WriteLine("Ruch wykonuje: " + gB.Imie);
+                    Console.WriteLine("Movement performs: " + gB.Imie + ".");
                     koniecGry = gB.WykonajRuch(plansza, planszaKopia);
                     ruchGraczaA = true;
                 }
@@ -51,17 +51,17 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
 
             Console.Clear();
             RysujPlansze(plansza);
-            Console.Write("Koniec gry! ");
+            Console.Write("End Game! ");
             if (koniecGry)
             {
-                Console.Write("Wygrał ");
+                Console.Write("Won ");
                 if (ruchGraczaA)
-                    Console.WriteLine(gB.Imie);
+                    Console.WriteLine(gB.Imie + ".");
                 else
-                    Console.WriteLine(gA.Imie);
+                    Console.WriteLine(gA.Imie + ".");
             }
             else
-                Console.WriteLine("Remis.");
+                Console.WriteLine("Draw.");
             Console.ReadKey();
         }
         /////////////////////////////////////////////////////////
@@ -93,9 +93,9 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
             int wysokosc = plansza.GetLength(0);
             int szerokosc = plansza.GetLength(1);
             if (szerokosc != wysokosc)
-                throw new Exception("Plansza nie jest kwadratowa!");
+                throw new Exception("The board is not a square!");
 
-            // Sprawdz wiersze
+            // Check the lines
             for (int i = 0; i < wysokosc; ++i)
             {
                 int sumaWiersza = 0;
@@ -108,7 +108,7 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
                     return true;
             }
 
-            // Sprawdz kolumny
+            // Check  column
             for (int j = 0; j < szerokosc; ++j)
             {
                 int sumaKolumny = 0;
@@ -120,7 +120,7 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
                 if (sumaKolumny == wysokosc)
                     return true;
             }
-            // Sprawdz przekatne
+            // Check diagonals
             int sumaPrzekatnejA = 0;
             int sumaPrzekatnejB = 0;
             for (int k = 0; k < szerokosc; ++k)
@@ -140,7 +140,7 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
             int wysokosc = plansza.GetLength(0);
             int szerokosc = plansza.GetLength(1);
             if (wysokosc != plansza.GetLength(0) || szerokosc != plansza.GetLength(1))
-                throw new Exception("Plansza nie jest kwadratowa!");
+                throw new Exception("The board is not a square!");
             for (int i = 0; i < wysokosc; ++i)
             {
                 for (int j = 0; j < szerokosc; ++j)
@@ -162,7 +162,7 @@ namespace TIC_TAC_TOE_NET_FRAMEWORK
             char wybranePole;
             do
             {
-                Console.Write("Wybierz puste pole: ");
+                Console.Write("Select empty slot: ");
                 wybranePole = Console.ReadKey().KeyChar;
                 Console.WriteLine();
             }
